@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'development') {
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 const GoogleSpreadsheet = require('google-spreadsheet');
 const creds = require('./Electronic-raffle-draw-5339243d9768.json');
@@ -23,7 +23,7 @@ app.get('/contestants', (req,res)=>{
 })
 
 if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('client/build'))
+  app.use(express.static(path.join(__dirname, "client", "build")));
   app.get('*', (req,res) =>{
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
